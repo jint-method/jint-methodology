@@ -15,3 +15,5 @@ A basic understanding of Custom Elements, Web Componets, and ES Modules is requi
 - [Custom Elements](https://html.spec.whatwg.org/multipage/custom-elements.html)
 - [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components)
 - [ES Modules](https://v8.dev/features/modules)
+
+Although not required a basic understanding of how a component's state works in [Reactjs](https://reactjs.org/docs/state-and-lifecycle.html) along with the [Model-view-controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) software design pattern will provide additional insights into some of the examples and diagrams that will be presented throughout this document.
