@@ -20,7 +20,7 @@ Although not required a basic understanding of how a component's state works in 
 
 ## Overview
 
-Let's begin with clearly and boldly stating that **this is not the solution to all your problems**, you need to find the right tool for the job. If you have a nail, the JINT hammer might work perfectly, however, when you have a screw, sometimes you'll want to check to see if React, Angular, or Vue screwdriver would work better. Use the best tool for the job. This is **NOT** a turn-key solution for every project.
+Let's begin with clearly and boldly stating that **this is not the solution to all your problems**, you need to find the right tool for the job. If you have a nail, the JINT hammer might work perfectly, however, when you have a screw, sometimes you'll want to check to see if [React](https://reactjs.org/), [Angular](https://angular.io/), or [Vue](https://vuejs.org/) screwdriver would work better. Use the best tool for the job. This is **NOT** a turn-key solution for every project.
 
 Listed below are the primary benefits of using the JINT method:
 
@@ -30,7 +30,7 @@ Listed below are the primary benefits of using the JINT method:
 
 ### Mix & Match Your Rendering
 
-JINT is structured around helping developers solve their project-specific problems. Developers don't have to choose between Server-Side Rendering and Client-Side Rendering, they can choose both without being restricted to any specific frameworks or templating engines.
+JINT is structured around helping developers solve their project-specific problems. Developers don't have to choose between server-side rendering and client-side rendering, they can choose both without being restricted to any specific frameworks or templating engines.
 
 Developers are able to use frameworks like [Next](https://nextjs.org/) or [Nuxt](https://nuxtjs.org/) or can use templating engines such as [Twig](https://twig.symfony.com/), [Blade](https://laravel.com/docs/5.8/blade), or even good ol' [PHP](https://www.php.net/).
 
