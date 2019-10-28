@@ -44,3 +44,43 @@ One of the key features of JINT is the ability to utilize Pjax. It's a term used
 ### JINT Pitfalls
 
 Choosing to build your project framework to maintain the ability to mix & match how content is rendered along with what tools you'll use may seem like a no-brainer, however, the JINT method comes at a cost: documentation. Even though JINT provides a general structure that helps define functionality, rendering, and the methods of communication every project is unique and will require a developer to think through the problem, architect a solution, and document how the gears will work together. The role of JINT is to provide a general structure for loading critical HTML and CSS before lazy loading everything else.
+
+# Order of Operations
+
+JINT is structured into two phases. Please note that some minor details may be missing and there will be some hand-waving when it comes to functionality that's defined by the [HTML spec](https://html.spec.whatwg.org/). In the following subsections, the terms server-side rendering and client-side rendering will be used when discussing when and where content should be rendered. These terms will be used within the context of dynamic content that's fed by a model, typically from a database. Static elements such as a footer can be server-side rendered and shipped with every page. The goal of JINT is to load dynamic content in an optimized manner, not to ship an empty frame that lazy loads every HTML element.
+
+### Phase I
+
+Phase one is structured around optimizing the initial page load. When thinking through how you'll implement JINT consider how much data you're queuing from the database along with what the impact of running your templating engine will be. Generally, anything above the fold that's not behind a user interaction should be server-side rendered.
+
+1. An HTTP request is sent to the server
+1. Server receives request
+1. Query the minimal amount of data needed
+1. Server-side render the critical HTML elements
+1. Ship the lightest version of the document to the client
+1. The client receives the document
+1. [HTML parsing begins](https://html.spec.whatwg.org/multipage/parsing.html#parsing)
+1. Inline loading animations `<style>` element is parsed by [CSSOM](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model)
+1. DOM parses the main application script element with `type="module"` (modules are [deferred by default](https://v8.dev/features/modules#defer))
+1. DOM asynchronously requests the application script
+1. No more bytes are available to be parsed -- `Document` object created & `load` event is [queued](https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task) on the [networking task source](https://html.spec.whatwg.org/multipage/webappapis.html#networking-task-source)
+1. Session history is updated
+1. Scripts are executed
+1. The `Document` becomes visible to the user, loading animation is running
+1. The main application script (hereinafter referred to as App) sets it's state to `loading`
+1. The App collects all critical CSS filenames
+1. The App parses out any duplicate CSS filenames
+1. App asynchronously fetches all critical CSS files using the [Fetch API](https://fetch.spec.whatwg.org/#fetch-api)
+1. All critical CSS file request have a response
+1. All critical CSS request responses are extracted as [Blobs](https://w3c.github.io/FileAPI/#dfn-Blob)
+1. Object URLs are created for all critical CSS blobs using the [URL API](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL)
+1. Dynamically generated `<link>` elements with a `rel="stylesheet"` attribute are generated for each object URL
+1. All `<link>` elements receive a `load` event listener
+1. All `<link>` elements are appended to the documents `<head>`
+1. All `<link>` elements `load` events have fired
+1. App sets it's state to `idling`
+1. Loading animation is hidden
+
+### Phase II
+
+Phase two is structured around lazy loading functionality, non-critical content, client-side rendering, and persistent state management.
