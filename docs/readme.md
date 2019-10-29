@@ -141,3 +141,101 @@ Write it inline. JINT is not here to restrict developer's ability to craft the s
 If a script has to be loaded first and immediately for whatever reason, load it. Write the `<script>` tag and choose `async`, `defer`, or `type="module"` as needed. If you need to use a script that supports an older browser use the `type="text/javascript" nomodule`  attributes.
 
 If you need CSS before the initial paint write a `<link>` tag, or even a `<style>` tag. If it's something minor such as setting a drawer to be `transform: translateX(-100%)` by default write an inline style using the `style` attribute.
+
+# The Art of Communication
+
+This section will cover the basics of how web components should communicate with one another along with information about how to manage state and will introduce the concept of *web modules*.
+
+### Web Modules
+
+The explanation of web modules will rely on an understanding of [ES Modules](https://v8.dev/features/modules), state managers, and [node modules](https://www.npmjs.com/). You can think of a web module as having to key roles.
+
+First, a web module can act as a state manager. When two web components need to share information or need to keep their states aligned a web module should be used. The general concept is that web components should be built to solve one problem or do one job, and they should do that job as quickly and efficiently as possible. There is no need to create a single component that tracks the event listeners of several elements with one stylesheet containing all the CSS. Get into the mindset of splitting your code into the smallest reusable pieces just like you would if you were building an interface with [React](https://reactjs.org/) or [Atomic Design](http://atomicdesign.bradfrost.com/table-of-contents/).
+
+Let's look at an example of how a cart drawer could work on an e-commerce website. There could be three individual web components that all need to manage the drawers open state. One is a cart icon button in the header, one is the close icon button in the cart, and finally, there is the cart drawer itself. Now that we have our functionality split into three web components, let's define a web module that will manage the state.
+
+```typescript
+interface CartManagerState
+{
+    isDrawerOpen : boolean,
+}
+
+class CartManager
+{
+    private state : CartManagerState;
+
+    constructor()
+    {
+        this.state = {
+            isDrawerOpen: false,
+        };
+    }
+
+    public toggleDrawer(forcedState:boolean = null) : void
+    {
+        if (forcedState !== null)
+        {
+            this.state.isDrawerOpen = forcedState;
+        }
+        else
+        {
+            this.state.isDrawerOpen = (this.state.isDrawerOpen) ? false : true;
+        }
+    }
+}
+
+export const cart:CartManager = new CartManager();
+```
+
+In the code above we define a `CartManager` class that has a public `toggleDrawer()` method that can take a boolean. At the bottom of the file, we used the `export` keyword as it's defined in [ES2015](https://www.ecma-international.org/ecma-262/6.0/). Now let's define the cart icon buttons functionality.
+
+```typescript
+import { cart } from './cart-manager.js';
+
+class CartIconButton extends HTMLElement
+{
+    connectedCallback()
+    {
+        this.addEventListener('click', ()=>{
+            cart.toggleDrawer();
+        });
+    }
+}
+customElements.define('cart-icon-button', CartIconButton);
+```
+
+At this point, we've created a web component that imports the `CartManager` and calls it's public `toggleDrawer()` method when clicked. At this point in the example, the key things to understand are that web modules are exported. This means that we don't have to load the web modules script since the `import` keyword will handle fetching the script when it's needed, the fewer resources loaded before they're needed, the better.
+
+Now that we have a web component communicating with a web module, how would we tell the cart drawer to open? There are a few options available and we'll take a moment to explain what method works the best.
+
+#### Public Methods
+
+With web components, we're able to use a query selector to find the element within the DOM and call its public methods. Let's assume the `cart-drawer` web component has a `setDrawerState()` method that takes a boolean. We could do the following in the `CartManager` class:
+
+```typescript
+class CartManager
+{
+    ...snip...
+
+    public toggleDrawer(forcedState:boolean = null) : void
+    {
+        if (forcedState !== null)
+        {
+            this.state.isDrawerOpen = forcedState;
+        }
+        else
+        {
+            this.state.isDrawerOpen = (this.state.isDrawerOpen) ? false : true;
+        }
+
+        const drawerElement = document.body.querySelector('cart-drawer');
+        drawerElement.setDrawerState(this.state.isDrawerOpen);
+    }
+}
+```
+
+There are a few key problems with this method. First, `setDrawerState()` could be `undefined`. Just because the element is in the DOM doesn't mean that the web component has been mounted. When using the JINT method the custom element is likely sitting in an unseen state and the script that contains the `setDrawerState()` method hasn't been requested/loaded yet.
+
+Now let's assume you're not using the JINT method and all script are render-blocking so you *"know"* that the method will be defined. What happens if this component was dynamic or if several instances existed? Are you going to use `document.body.querySelectorAll('cart-drawer')` every time the drawer is toggled just so you can call `setDrawerState()` within a try-catch block hoping everything works?
+
+What would happen if you have different web components? Let's pretend that instead of sending the drawers open state that we need to send an array of line items to our cart. Now, let's say the user is on the cart page. We need to dynamically keep two cart instances in sync. One cart is in the cart drawer that the user can toggle open and the other instance exists on the cart page. When the user modifies the quantity of a line item in the cart drawer are you going to write a bunch of query selectors to see if the elements are defined before trying to *"blindly"* call public methods hoping everything syncs up correctly? No, you're not, or at least you shouldn't.
