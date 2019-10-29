@@ -306,3 +306,41 @@ class CartIconButton extends HTMLElement
     }
 }
 ```
+
+### Web Modules Continued
+
+Now that we've covered how web modules can be used to manage the state and communication between several web components let's discuss their second primary function. Web modules can also act as node modules/npm packages that you could use on the front-end, like [animejs](https://github.com/juliangarnier/anime/). This section will contain two examples of how web modules can be used as a controller that manipulates a model (see [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)) or could define it's own MVC structure.
+
+#### Manipulating the DOM
+
+Let's say that only on a specific page we want the body's background color to randomly change as the user scrolls. As previously state, web components should be designed to do one specific job and to do it efficiently. To expand upon that, web components should be restricted to manipulate their view (as defined by the custom element the component is attached to). So, how do we manipulate the body? Web modules.
+
+```typescript
+class BackgroundChanger
+{
+    constructor()
+    {
+        document.body.addEventListener('scroll', this.handleScrollEvent, { passive: true });
+    }
+
+    private handleScrollEvent:EventListener = this.changeBackground.bind(this);
+    
+    private changeBackground() : void
+    {
+        document.body.style.backgroundColor = this.getRandomColor();
+    }
+
+    private getRandomColor() : string
+    {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+}
+new BackgroundChanger();
+```
+
+Now that we have our `BackgroundChanger` class that adds a [passive](https://developers.google.com/web/updates/2016/06/passive-event-listeners) `scroll` event listener, how do we actually include the file? Using a script tag. You could write `<script src="/background-changer.js" type="module">`.
