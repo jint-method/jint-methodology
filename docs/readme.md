@@ -83,4 +83,61 @@ Phase one is structured around optimizing the initial page load. When thinking t
 
 ### Phase II
 
-Phase two is structured around lazy loading functionality, non-critical content, client-side rendering, and persistent state management.
+Phase two is structured around lazy loading functionality, non-critical content, client-side rendering, and persistent state management. Typically content that is rendered in phase two is hidden behind a user interaction or below the fold. Usually, data for the content below the fold will be fetched when the component becomes visible and the content will be client-side rendered when the data arrives. Depending on the type of content a loading animation or skeleton frame should be used. When components have several moving parts it can be helpful to display the loading bar as a progress bar informing the user how for along the loading process is. Phase two is split into two parts. Phase 2a loads all non-critical stylesheets and Phase 2b handles web components.
+
+#### Stylesheets
+
+1. Collect all non-critical CSS filenames
+1. Purge duplicate filenames
+1. Dynamically generated `<link>` elements with a `rel="stylesheet"` attribute are generated for each object URL
+1. Verify for each `<link>` that the stylesheet hasn't already loaded -- if it has don't append the link
+1. All `<link>` elements receive a `load` event listener
+1. All `<link>` elements are appended to the documents `<head>`
+1. All `<link>` elements `load` events have fired
+
+#### Web Components
+
+1. Collect all [Custom Elements](https://html.spec.whatwg.org/multipage/custom-elements.html) that will be upgraded into [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components)
+1. Observe all custom elements using the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver)
+1. IO callback fired
+1. Verify that [IntersectionObserverEntry](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry) is intersecting
+1. Verify the web components script hasn't already been loaded -- if it has already loaded only unobserve the entry
+1. Dynamically generate a `<script>` element with a `type="module"` attribute where the `src` attribute uses the web components filename
+1. Attach a `load` event listener to the script element
+1. Append the script to the `<head>`
+1. Unobserve the entry
+
+#### Phase II Expanded
+
+There are several ways to expand upon phase 2 to enhance the user experience. For example, setting at custom `state` attribute on the custom elements that change from `unseen` to `loading` to `mounted` could then be used in CSS to manage how the web component appears. In the example below the component doesn't show it's button elements until the web component has been mounted.
+
+```scss
+custom-element
+{
+    &[state=mounted]
+    {
+        button
+        {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    button
+    {
+        visibility: hidden;
+        opacity: 0;
+        transition: all 150ms ease;
+    }
+}
+```
+
+You could also create a system where the stylesheets for web components are not fetched until the components become visible.
+
+*What if I need actual critical CSS/JS?*
+
+Write it inline. JINT is not here to restrict developer's ability to craft the solution needed for their unique situation, it's a guideline.
+
+If a script has to be loaded first and immediately for whatever reason, load it. Write the `<script>` tag and choose `async`, `defer`, or `type="module"` as needed. If you need to use a script that supports an older browser use the `type="text/javascript" nomodule`  attributes.
+
+If you need CSS before the initial paint write a `<link>` tag, or even a `<style>` tag. If it's something minor such as setting a drawer to be `transform: translateX(-100%)` by default write an inline style using the `style` attribute.
