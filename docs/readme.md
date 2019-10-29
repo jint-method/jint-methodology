@@ -148,7 +148,7 @@ This section will cover the basics of how web components should communicate with
 
 ### Web Modules
 
-The explanation of web modules will rely on an understanding of [ES Modules](https://v8.dev/features/modules), state managers, and [node modules](https://www.npmjs.com/). You can think of a web module as having to key roles.
+The explanation of web modules will rely on an understanding of [ES Modules](https://v8.dev/features/modules), state managers, and [node modules](https://www.npmjs.com/). You can think of a web module as having tow primary roles.
 
 First, a web module can act as a state manager. When two web components need to share information or need to keep their states aligned a web module should be used. The general concept is that web components should be built to solve one problem or do one job, and they should do that job as quickly and efficiently as possible. There is no need to create a single component that tracks the event listeners of several elements with one stylesheet containing all the CSS. Get into the mindset of splitting your code into the smallest reusable pieces just like you would if you were building an interface with [React](https://reactjs.org/) or [Atomic Design](http://atomicdesign.bradfrost.com/table-of-contents/).
 
@@ -239,3 +239,70 @@ There are a few key problems with this method. First, `setDrawerState()` could b
 Now let's assume you're not using the JINT method and all script are render-blocking so you *"know"* that the method will be defined. What happens if this component was dynamic or if several instances existed? Are you going to use `document.body.querySelectorAll('cart-drawer')` every time the drawer is toggled just so you can call `setDrawerState()` within a try-catch block hoping everything works?
 
 What would happen if you have different web components? Let's pretend that instead of sending the drawers open state that we need to send an array of line items to our cart. Now, let's say the user is on the cart page. We need to dynamically keep two cart instances in sync. One cart is in the cart drawer that the user can toggle open and the other instance exists on the cart page. When the user modifies the quantity of a line item in the cart drawer are you going to write a bunch of query selectors to see if the elements are defined before trying to *"blindly"* call public methods hoping everything syncs up correctly? No, you're not, or at least you shouldn't.
+
+#### Custom Events
+
+Another option for managing communication between web modules and web components is the use of the [Custom Events API](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent). Instead of having to explicitly call public methods on every instance of a possible web component (as defined in the Public Methods option above) we can create a custom event the fires on the `document` and contains an instance of the current state. Then any web component on the page that needs to react to state changes can do so when they receive the event. This is the preferred method because it follows the idea that each web component should be responsible for managing its functionality. Below is an example of how the custom event could be created by the `CartManager` class.
+
+```typescript
+class CartManager
+{
+    ...snip...
+
+    public toggleDrawer(forcedState:boolean = null) : void
+    {
+        const updatedState:Partial<CartManagerState> = {};
+        if (forcedState !== null)
+        {
+            updatedState.isDrawerOpen = forcedState;
+        }
+        else
+        {
+            updatedState.isDrawerOpen = (this.state.isDrawerOpen) ? false : true;
+        }
+
+        this.setState(updatedState);
+    }
+
+    private setState(updatedState:Partial<CartManagerState>) : void
+    {
+        Object.keys(updatedState).forEach((key:string) => {
+            if (this.state[key] !== null && this.state[key] !== undefined)
+            {
+                if (updatedState[key] !== this.state[key])
+                {
+                    this.updatedState[key] = newState[key];
+                }
+            }
+            else
+            {
+                this.state[key] = updatedState[key];
+            }
+        });
+        const updateEvent = new CustomEvent('cart:update', {detail: { state: { ...this.state } } });
+        document.dispatchEvent(updateEvent);
+    }
+}
+```
+
+In the code above we create an empty updated state object and only set the values that need to change. We then added a new private `setState()` method that takes a partial state object. We then proceed to update just the changed values of the state with the values that are set in the updated state object. Then an update event is created that contains an instance of the state object before being fired on the `document`. Then each component that needs to react can simply listen for the update event.
+
+```typescript
+class CartIconButton extends HTMLElement
+{
+    connectedCallback()
+    {
+        document.addEventListener('cart:update', (event:CustomEvent) => {
+            const cartState = event.detail.state;
+            if (cartState.isDrawerOpen)
+            {
+                this.style.transform = 'translateX(0)';
+            }
+            else
+            {
+                this.style.transform = 'translateX(-100%)';
+            }
+        });
+    }
+}
+```
