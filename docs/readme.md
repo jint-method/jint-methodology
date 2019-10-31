@@ -109,11 +109,11 @@ Phase two is structured around lazy loading functionality, non-critical content,
 
 #### Custom Element to Web Component Upgrade Path
 
-![Diagram showing a web components upgrade path](/docs/images/custom-element-to-web-component.png)
+![Diagram showing a web components upgrade path](/images/custom-element-to-web-component.png)
 
 #### Web Component Life Cycle
 
-![Diagram explaining a web components life cycle](/docs/images/web-component-lifecycle.png)
+![Diagram explaining a web components life cycle](/images/web-component-lifecycle.png)
 
 #### Phase II Expanded
 
