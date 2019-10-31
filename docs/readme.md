@@ -107,6 +107,14 @@ Phase two is structured around lazy loading functionality, non-critical content,
 1. Append the script to the `<head>`
 1. Unobserve the entry
 
+#### Custom Element to Web Component Upgrade Path
+
+![Diagram showing a web components upgrade path](/docs/images/custom-element-to-web-component.png)
+
+#### Web Component Life Cycle
+
+![Diagram explaining a web components life cycle](/docs/images/web-component-lifecycle.png)
+
 #### Phase II Expanded
 
 There are several ways to expand upon phase 2 to enhance the user experience. For example, setting at custom `state` attribute on the custom elements that change from `unseen` to `loading` to `mounted` could then be used in CSS to manage how the web component appears. In the example below the component doesn't show it's button elements until the web component has been mounted.
@@ -153,6 +161,8 @@ The explanation of web modules will rely on an understanding of [ES Modules](htt
 First, a web module can act as a state manager. When two web components need to share information or need to keep their states aligned a web module should be used. The general concept is that web components should be built to solve one problem or do one job, and they should do that job as quickly and efficiently as possible. There is no need to create a single component that tracks the event listeners of several elements with one stylesheet containing all the CSS. Get into the mindset of splitting your code into the smallest reusable pieces just like you would if you were building an interface with [React](https://reactjs.org/) or [Atomic Design](http://atomicdesign.bradfrost.com/table-of-contents/).
 
 Let's look at an example of how a cart drawer could work on an e-commerce website. There could be three individual web components that all need to manage the drawers open state. One is a cart icon button in the header, one is the close icon button in the cart, and finally, there is the cart drawer itself. Now that we have our functionality split into three web components, let's define a web module that will manage the state.
+
+[Click here](https://examples.jintmethod.dev/cart-manager/) to view the live demo of the following example.
 
 ```typescript
 interface CartManagerState
@@ -215,8 +225,6 @@ With web components, we're able to use a query selector to find the element with
 ```typescript
 class CartManager
 {
-    ...snip...
-
     public toggleDrawer(forcedState:boolean = null) : void
     {
         if (forcedState !== null)
@@ -247,8 +255,6 @@ Another option for managing communication between web modules and web components
 ```typescript
 class CartManager
 {
-    ...snip...
-
     public toggleDrawer(forcedState:boolean = null) : void
     {
         const updatedState:Partial<CartManagerState> = {};
@@ -271,7 +277,7 @@ class CartManager
             {
                 if (updatedState[key] !== this.state[key])
                 {
-                    this.updatedState[key] = newState[key];
+                    this.state[key] = updatedState[key];
                 }
             }
             else
@@ -313,14 +319,16 @@ Now that we've covered how web modules can be used to manage the state and commu
 
 #### Manipulating the DOM
 
-Let's say that only on a specific page we want the body's background color to randomly change as the user scrolls. As previously state, web components should be designed to do one specific job and to do it efficiently. To expand upon that, web components should be restricted to manipulate their view (as defined by the custom element the component is attached to). So, how do we manipulate the body? Web modules.
+Let's say that only on a specific page we want the body's background color to randomly change as the user scrolls. As previously stated, web components should be designed to do one specific job and to do it efficiently. To expand upon that, web components should be restricted to manipulate their view (as defined by the custom element the component is attached to). So, how do we manipulate the body? We use a web module.
+
+[Click here](https://examples.jintmethod.dev/background-changer/) to view the live demo of the following example.
 
 ```typescript
 class BackgroundChanger
 {
     constructor()
     {
-        document.body.addEventListener('scroll', this.handleScrollEvent, { passive: true });
+        window.addEventListener('scroll', this.handleScrollEvent, { passive: true });
     }
 
     private handleScrollEvent:EventListener = this.changeBackground.bind(this);
