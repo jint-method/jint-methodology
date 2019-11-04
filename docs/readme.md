@@ -486,15 +486,19 @@ The HTML Content Template `<template>` element is used to hold HTML that is not 
 
 The template element is the preferred method for handling client-side rendering. The example below will showcase how the template element could be used to generate a call to action cards for a project's blog.
 
+[Click here](https://examples.jintmethod.dev/blog-cards/) to view the live demo of this example.
+
 ```html
 <blog-cards-component>
     <blog-card-container></blog-card-container>
     <template>
         <blog-card>
-            <img>
-            <h3></h3>
-            <p></p>
-            <a></a>
+            <a>
+                <img>
+                <h3></h3>
+                <p></p>
+                <button></button>
+            </a>
         </blog-card>
     </template>
 </blog-cards-component>
@@ -517,13 +521,14 @@ interface BlogCard
     },
 }
 
-class BlogCardsComponent
+class BlogCardsComponent extends HTMLElement
 {
     private _template : HTMLTemplateElement;
     private _cardContainer : HTMLElement;
 
     constructor()
     {
+        super();
         this._template = this.querySelector('template');
         this._cardContainer = this.querySelector('blog-card-container');
     }
@@ -536,13 +541,14 @@ class BlogCardsComponent
             const title = node.querySelector('h3');
             const copy = node.querySelector('p');
             const link = node.querySelector('a');
+            const button = node.querySelector('button');
 
             img.src = card.img.url;
             img.alt = card.img.alt;
             title.innerText = card.title;
             copy.innerText = card.copy;
-            link.href = link.url;
-            link.innerText = link.text;
+            link.href = card.link.url;
+            button.innerText = card.link.text;
 
             this._cardContainer.append(node);
         });
