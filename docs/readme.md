@@ -479,3 +479,82 @@ customElements.define('user-account', UserAccountComponent);
 ```
 
 With the example web component above we now have a user account web component that uses a web module to prompt the user asking if they're sure the account should be deleted. If they click the delete button and confirm the deletion of the account the `deleteAccount()` method is called.
+
+### Content Template Element
+
+The HTML Content Template `<template>` element is used to hold HTML that is not immediately rendered when the page is loaded. According to the [HTML spec](https://html.spec.whatwg.org/multipage/scripting.html#the-template-element), the template element is used to hold HTML that will be used to declare a document fragment within a script. Query selectors can then be used to access the HTML elements within the fragment so the content can be populated before the fragment is appended to the DOM.
+
+The template element is the preferred method for handling client-side rendering. The example below will showcase how the template element could be used to generate a call to action cards for a project's blog.
+
+```html
+<blog-cards-component>
+    <blog-card-container></blog-card-container>
+    <template>
+        <blog-card>
+            <img>
+            <h3></h3>
+            <p></p>
+            <a></a>
+        </blog-card>
+    </template>
+</blog-cards-component>
+```
+
+In the HTML above we define a blog card element that contains a cards container where the cards that are created will be appended to along with the template that will be used to generate the cards. When rendering the template element represents nothing so won't affect the layout and can be placed wherever it can be conveniently referenced. The `<blog-cards-component>` custom element will be upgraded to a web component using the following script.
+
+```typescript
+interface BlogCard
+{
+    title: string,
+    copy: string,
+    img: {
+        url: string,
+        alt: string,
+    },
+    link: {
+        text: string,
+        url: string,
+    },
+}
+
+class BlogCardsComponent
+{
+    private _template : HTMLTemplateElement;
+    private _cardContainer : HTMLElement;
+
+    constructor()
+    {
+        this._template = this.querySelector('template');
+        this._cardContainer = this.querySelector('blog-card-container');
+    }
+
+    private generateBlogCards(data:Array<BlogCard>) : void
+    {
+        data.map((card) => {
+            const node = document.importNode(this._template.content, true);
+            const img = node.querySelector('img');
+            const title = node.querySelector('h3');
+            const copy = node.querySelector('p');
+            const link = node.querySelector('a');
+
+            img.src = card.img.url;
+            img.alt = card.img.alt;
+            title.innerText = card.title;
+            copy.innerText = card.copy;
+            link.href = link.url;
+            link.innerText = link.text;
+
+            this._cardContainer.append(node);
+        });
+    }
+}
+customElements.define('blog-cards-component', BlogCardsComponent);
+```
+
+The code above hand-waves some of the functionality such as: where does the card data come from, is there a loading animation/state, can the user infinitely scroll to view more cards, is there/should there be a load more button, etc. However, the script should give a general idea of how the template element can be leveraged to quickly render content on the client's side.
+
+Although the template element is the preferred method for client-side rendering, sometimes it is better to use a JavaScript templating engine especially when there is a vast amount of dynamic data that needs to be rendered.
+
+### JavaScript Templating Engines
+
+Throughout this section, we'll be referring to [handlebars](https://handlebarsjs.com/) as the JavaScript templating engine. Other libraries solve the same problem as handlebars, however, handlebars is used by 2.2 million projects and has 154 contributors on [GitHub](https://github.com/wycats/handlebars.js/) so they're a safe choice since they have plenty of community support behind them.
