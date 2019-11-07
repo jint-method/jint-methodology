@@ -1,6 +1,6 @@
 # TL;DR JINT Method
 
-So you don't want to read the full, thoughtfully crafted, and example-rich version of the JINT method? That's fine. Here's the tldr version.
+So you don't want to read the full, thoughtfully crafted, and example-rich version of the JINT method? That's fine. Here's the tldr version. If you want to read the full version it's [available here](https://jintmethod.dev).
 
 ## General Overview
 
