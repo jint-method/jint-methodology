@@ -16,9 +16,7 @@ When JavaScript is needed to add functionality to a custom element, upgrade the 
 
 *How do you get the web components JavaScript?* Lazy load it. The runtime script should use [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to watch the custom elements and when the custom element is intersecting with the viewport fetch the script or use [dynamic importing](https://v8.dev/features/dynamic-import).
 
-*What can web components communicate with?* Web Modules, and sometimes parent/child web components.
-
-Web components can communicate with other web components as long as the other components exist within the base component's view. Two separate web components should **not** communicate with each other directly. A web component (like a button) within another web component (like a drawer) can communicate with each other as long as no outside web component also needs to communicate with them.
+*What can web components communicate with?* Web Modules, and sometimes parent/child web components. Web components can communicate with other web components as long as the DOM hierarchy is a parent/child structure and no outside components will be communicated with. Two separate web components should **NOT** directly communicate with one another.
 
 ## Web Modules
 
