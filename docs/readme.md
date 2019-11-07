@@ -1,10 +1,10 @@
 # Just In The Nick Of Time
 
+Don't have time to read this? Read the [tl;dr version](https://jintmethod.dev/tldr) instead.
+
 The JINT method is a front-end design paradigm focused on serving resources using the Just In Time (JIT) strategy. JIT has been used in manufacturing by [Toyota](https://en.wikipedia.org/wiki/Just-in-time_manufacturing) since the 1960s and the earliest JIT compiler was created at the same time by [John McCarthy](https://en.wikipedia.org/wiki/Just-in-time_compilation) while he worked on the [LISP](https://en.wikipedia.org/wiki/Lisp_(programming_language)) programming language. JIT compiling is currently utilized by Google's [v8 JavaScript Engine](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) which in turn is used by Google Chrome, Chromium, Brave, and Opera browsers along with Electron applications and Nodejs.
 
 The purpose of JINT is to provide a structured method along with a handful of examples and source code on how resources can be loaded efficiently and quickly. Nothing is written in stone and the framework is malleable. You, the developer, **need to think through the problem and provide the solution**.
-
-Don't have time to read this? Read the [tldr version](https://jintmethod.dev/tldr).
 
 ### Why This Matters
 
