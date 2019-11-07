@@ -4,6 +4,8 @@ The JINT method is a front-end design paradigm focused on serving resources usin
 
 The purpose of JINT is to provide a structured method along with a handful of examples and source code on how resources can be loaded efficiently and quickly. Nothing is written in stone and the framework is malleable. You, the developer, **need to think through the problem and provide the solution**.
 
+Don't have time to read this? Read the [tldr version](https://jintmethod.dev/tldr).
+
 ### Why This Matters
 
 Before diving into the nitty-gritty details about implementing the JINT model we'll cover some of the biggest reasons it can benefit you and your users. JINT forces you to carefully consider how your product will load its resources which can directly impact products SEO considering [Google ranks search and ads based on speed](https://developers.google.com/web/updates/2018/07/search-ads-speed). Managing load times can also help retain users according to studies that have shown [62% of users will wait 5 seconds or less for a page to load before leaving](https://www.imperva.com/blog/ecommerce-study/) and, according to Google, [53% of mobile users will leave after 3 seconds](https://www.thinkwithgoogle.com/marketing-resources/data-measurement/mobile-page-speed-new-industry-benchmarks/). Studies also show that when users see a skeleton screen (when compared to spinners or blank screens) they [precieve the load time to be shorter](https://uxdesign.cc/what-you-should-know-about-skeleton-screens-a820c45a571a).
