@@ -18,23 +18,23 @@ When JavaScript is needed, upgrade a custom element into a [Web Component](https
 
 **How do you get the web components JavaScript with only one script tag?** Lazy load the JavaScript. Use [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to watch the custom elements that need to be upgraded and when the custom element intersects with the viewport fetch the script or use the [dynamic import syntax](https://v8.dev/features/dynamic-import).
 
-**What if I know I'll need a web component right away?** Eager load the JavaScript. It's the same as lazy-loading expect don't use the Intersection Observer.
+**What if I know I'll need a web component right away?** Eager load the JavaScript. It's the same as lazy-loading except it doesn't use the Intersection Observer.
 
-**What can web components communicate with?** Web Modules, and sometimes web components. Web components can communicate with other web components if DOM hierarchy structure is a parent/child relationship and no outside components will be communicated with. Separated web components should **NOT** directly communicate with one another.
+**What can web components communicate with?** In short, web Modules and sometimes web components. Web components can communicate with other web components if the DOM hierarchy structure is a parent/child relationship and no outside components will communicate with the component. Separated web components should **NOT** directly communicate with one another.
 
 ## Web Modules
 
 Web modules take on several roles but are primarily used as state managers.
 
-Web modules usually consist of a class and always have at least one export. Modules can be imported using the import statement or with [dynamic importing](https://v8.dev/features/dynamic-import). When a module is used for state management any web components can access the module via an import statement.
+Web modules usually consist of a class and always have at least one export. Modules can be imported using the import statement or with [dynamic importing](https://v8.dev/features/dynamic-import). When a module is used for state management, any web components can access the module via an import statement.
 
-State management web modules never call methods on or pass information directly to web components, instead, they create and dispatch a [Custom Event](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent) on the `document` allowing any web component within the DOM to receive the event and react accordingly.
+State management web modules never call methods on or pass information directly to web components. Instead, they create and dispatch a [Custom Event](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent) on the `document`, allowing any web component within the DOM to receive the event and react accordingly.
 
-When modules are not used as state managers they can do anything as long as their functions, variables, or classes are exported and only imported when needed by a web component or another web module.
+When not used as state managers, web modules can do anything as long as their functions, variables, or classes are exported. Other components and web modules can then import the web module as needed.
 
 ## Stylesheets
 
-Any stylesheet marked as eager loaded should be loaded after the `DOMContentLoaded` event has fired on the `window`. Once all eager stylesheets have loaded the DOM state should change from hard loading to soft loading and the full-screen loading animation should be hidden/stopped.
+Any stylesheet marked as eager loaded should be loaded after the `DOMContentLoaded` event has fired on the `window`. Once all eager stylesheets have loaded, the DOM state should change from hard loading to soft loading and the full-screen loading animation should be hidden/stopped. Typically, the eager loaded stylesheets would contain the critical css needed for the initial user experince. 
 
 After the DOM state changes to soft loading, all lazy-loaded stylesheets should be loaded. Once all lazy stylesheets have loaded the DOM state should change from soft loading to idling and any loading animations should be hidden/stopped.
 
