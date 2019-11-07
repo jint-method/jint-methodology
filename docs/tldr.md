@@ -14,7 +14,9 @@ When JavaScript is needed to add functionality to a custom element, upgrade the 
 
 ![Diagram showing a web components upgrade path](/images/custom-element-to-web-component.png)
 
-*How do you get the web components JavaScript?* Lazy load it. The runtime script should use [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to watch the custom elements and when the custom element is intersecting with the viewport fetch the script or use [dynamic importing](https://v8.dev/features/dynamic-import).
+*How do you get the web components JavaScript?* Lazy load it using [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to watch the custom elements. When the custom element is intersecting with the viewport fetch the script or use [dynamic importing](https://v8.dev/features/dynamic-import).
+
+*What if I know I'll need a web component right away?* Eager load it.
 
 *What can web components communicate with?* Web Modules, and sometimes parent/child web components. Web components can communicate with other web components as long as the DOM hierarchy is a parent/child structure and no outside components will be communicated with. Two separate web components should **NOT** directly communicate with one another.
 
