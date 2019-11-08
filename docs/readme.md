@@ -92,3 +92,7 @@ After the DOM state changes to soft loading, all lazy-loaded stylesheets should 
 ## JINT Continued
 
 A full, example-rich version of the JINT method is [available here](https://jintmethod.dev/expanded).
+
+## JINT Examples
+
+[Click here](https://examples.jintmethod.dev/) to view the JINT methodology demos.
