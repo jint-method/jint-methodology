@@ -95,11 +95,13 @@ Stop overworking the main thread and stop thinking of it as the main thread, it'
 
 **Where should I manage my state?** Web worker, web server, or anywhere that's not the UI thread.
 
-## OMT Controllers
+## Controllers
 
-An OMT (off the main thread) controller is used as an API for accessing a model that's maintained off the main thread. It can be accessed via an import statement and will consist of public functions that pass information to an OMT controller (web server, web worker, etc).
+A controller is used as an API for accessing a model that's maintained off the main thread. The controller is accessed by web components and other controllers via import statements and will consist of public functions that pass information onto an OMT (off the main thread) controller such as a web server, web worker, etc.
 
-When communicating with a state manager the OMT controller is responsible for informing web components of the updated state. Web components never receive information directly. Instead, they are informed of state changes by a [Custom Event](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent) that is dispatched on the `document`.
+When communicating with a state manager the controller is responsible for informing web components of the updated state. Web components never receive information directly. Instead, they are informed of state changes by a [Custom Event](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent) that is dispatched on the `document`.
+
+![Diagram visualizing the concept of off-loading work to other threads](/images/sharing-the-workload.png)
 
 ## Web Modules
 
