@@ -51,19 +51,19 @@ Stop overworking the main thread and stop thinking of it as the main thread, it'
 
 ![Diagram visualizing the concept of off-loading work to other threads](/images/sharing-the-workload.png)
 
-**What can I do on the UI thread?**
+#### What can I do on the UI thread?
 Handle event listeners and DOM manipulation.
 
-**What shouldn't I do on the UI thread?**
+#### What shouldn't I do on the UI thread?
 Fetch requests, state management, calculations, and anything that doesn't directly manipulate the DOM.
 
-**Where should I perform my fetch requests?**
+#### Where should I perform my fetch requests?
 In a web worker, service workers, or anywhere that's not the UI thread.
 
-**Where should I manage my state?**
+#### Where should I manage my state?
 In a web worker, web server, or anywhere that's not the UI thread.
 
-**Where should I handle my business logic?**
+#### Where should I handle my business logic?
 In a web worker, web server, or anywhere that's not the UI thread.
 
 ---
