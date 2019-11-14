@@ -10,13 +10,13 @@ When JavaScript is needed, upgrade a custom element into a [Web Component](https
 
 ![Diagram showing a web components upgrade path](/images/custom-element-to-web-component.png)
 
-**How do you get the web components JavaScript with only one script tag?**
+#### How do you get the web components JavaScript with only one script tag?
 Lazy load the JavaScript. Use [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to watch the custom elements that need to be upgraded and when the custom element intersects with the viewport fetch the script or use the [dynamic import syntax](https://v8.dev/features/dynamic-import).
 
-**What if I know I'll need a web component right away?**
+#### What if I know I'll need a web component right away?
 Eager load the JavaScript. It's the same as lazy-loading except it doesn't use the Intersection Observer API.
 
-**What can web components communicate with?**
+#### What can web components communicate with?
 In short, web Modules and sometimes web components. Web components can communicate with other web components if the DOM hierarchy structure is a parent/child relationship and no outside components will communicate with the component. Separated web components should **NOT** directly communicate with one another.
 
 ## Controllers
