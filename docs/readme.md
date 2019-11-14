@@ -70,6 +70,6 @@ In a web worker, web server, or anywhere that's not the UI thread.
 
 ### Continued Reading
 
-- [Implementation Guidelines](https://examples.jintmethod.dev/implementation-guidelines)
+- [Implementation Guidelines](https://jintmethod.dev/implementation-guidelines)
 - [JINT Expanded](https://jintmethod.dev/expanded)
 - [Interactive Demos](https://examples.jintmethod.dev/)

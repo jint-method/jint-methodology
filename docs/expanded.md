@@ -529,5 +529,5 @@ Since the goal of JINT is to provide a general solution for merging client-side 
 ### Continued Reading
 
 - [An Introduction to JINT](https://examples.jintmethod.dev/)
-- [Implementation Guidelines](https://examples.jintmethod.dev/implementation-guidelines)
+- [Implementation Guidelines](https://jintmethod.dev/implementation-guidelines)
 - [Interactive Demos](https://examples.jintmethod.dev/)
