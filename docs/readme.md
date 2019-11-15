@@ -29,11 +29,16 @@ JINT was constructed using ideas from the following videos and articles:
 
 - [RAIL Model](https://developers.google.com/web/fundamentals/performance/rail)
 - [App Shell Model](https://developers.google.com/web/fundamentals/architecture/app-shell)
-- [Off main-thread state management](https://dassur.ma/things/react-redux-comlink/)
-- [Main thread is overworked](https://youtu.be/7Rrv9qFMWNM)
-- [Architecting web applications](https://youtu.be/Vg60lf92EkM)
-- [Adaptive loading](https://youtu.be/puUPpVrIRkc)
-- [Speed essentials](https://youtu.be/reztLS3vomE)
+- [Idle Until Urgent](https://philipwalton.com/articles/idle-until-urgent/)
+- [Off Main-Thread State Management](https://dassur.ma/things/react-redux-comlink/)
+- [The 9am Rush Hour](https://dassur.ma/things/the-9am-rush-hour/)
+- [Main Thread is Overworked](https://youtu.be/7Rrv9qFMWNM)
+- [Architecting Web Applications](https://youtu.be/Vg60lf92EkM)
+- [Adaptive Loading](https://youtu.be/puUPpVrIRkc)
+- [Speed Essentials](https://youtu.be/reztLS3vomE)
+- [Lights, Camera, Action!](https://dassur.ma/things/lights-camera-action/)
+- [An Actor, a model, and an architect walk into the web...](https://dassur.ma/things/actormodel/)
+- [Headless Web Development](https://dassur.ma/things/headless-web-development/)
 
 ## Overview
 
