@@ -1,6 +1,12 @@
 # Implementation Guidelines
 
-The only `<script>` tag should be your runtime, and it should be deferred. The only `<style>` or `<link rel="stylesheet">` tags should be critical CSS and other CSS should be inline, eagerly loaded, or lazy-loaded.
+**A note from the author:** Use your brain! This is not the end-all-be-all set from on-high guidelines that everyone and every project must follow. Do whatever you need to do to make your product work. If you need a second script, add it. The world won't end and your product won't go from super awesome to utter crap. Take your time, make good decisions, write quality code, and everything will work out in the end.
+
+## Scripts
+
+The only `<script>` tag should be your runtime, and it should be deferred.
+
+The only `<style>` or `<link rel="stylesheet">` tags should be critical CSS. All other CSS should be inline, eagerly loaded, or lazy-loaded.
 
 ## Web Components
 
@@ -11,23 +17,20 @@ When JavaScript is needed, upgrade a custom element into a [Web Component](https
 ![Diagram showing a web components upgrade path](/images/custom-element-to-web-component.png)
 
 #### How do you get the web components JavaScript with only one script tag?
+
 Lazy load the JavaScript. Use [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to watch the custom elements that need to be upgraded and when the custom element intersects with the viewport fetch the script or use the [dynamic import syntax](https://v8.dev/features/dynamic-import).
 
 #### What if I know I'll need a web component right away?
-Eager load the JavaScript. It's the same as lazy-loading except it doesn't use the Intersection Observer API.
 
-#### What can web components communicate with?
-In short, web Modules and sometimes web components. Web components can communicate with other web components if the DOM hierarchy structure is a parent/child relationship and no outside components will communicate with the component. Separated web components should **NOT** directly communicate with one another.
+Eager load the JavaScript. It's the same as lazy-loading except it doesn't use the Intersection Observer API.
 
 ## Controllers
 
-A controller is used to access a model that's maintained off the main thread. The controller can be accessed by web components and other controllers via import statements and will consist of public functions that pass information onto an OMT (off the main thread) controller (such as a web server, web worker, etc).
+A controller is used to access a model that's maintained off the main thread. The controller can be accessed by web components and other controllers.
 
-When communicating with a state manager the controller is responsible for informing web components of the updated state. Web components never receive information directly. Instead, they are informed of state changes by a [Custom Event](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent) that is dispatched on the `document`.
+## Packages and Libraries
 
-## Web Modules
-
-Web modules typically consist of a class that has at least one export. Modules can be imported using the import statement or [dynamic importing](https://v8.dev/features/dynamic-import). A web module's role is to directly manipulate the DOM. [Click here](https://examples.jintmethod.dev/dialog-maker/) for an example of a dialog modal generator.
+Try to limit your use of NPM packages and 3rd party libraries. Use tools like [rollup](https://rollupjs.org/guide/en/#introduction) to import the 3rd party code into your project. Don't assume 3rd party libraries are built to be imported using [ES Modules](https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/) and don't assume they'll be easy to implement in your project.
 
 ## Stylesheets
 
@@ -36,6 +39,10 @@ Any stylesheet marked as eager loaded should be loaded after the `DOMContentLoad
 After the DOM state changes to soft loading, all lazy-loaded stylesheets should be loaded. Once all lazy stylesheets have loaded the DOM state should change from soft loading to idling and any loading animations should be hidden/stopped.
 
 Stylesheets hidden behind a user interaction should be lazy-loaded when the interaction occurs.
+
+## Communication
+
+Use a modified version of the [Actor Model](https://www.brianstorti.com/the-actor-model/) where all Actors have at least one inbox. Not all Web Components and Controllers are Actors. Web Components and Controllers do not have to be Actors to send a message to an Actor.
 
 ## Ideal JINT Loading Strategy
 
@@ -48,3 +55,4 @@ Stylesheets hidden behind a user interaction should be lazy-loaded when the inte
 - [An Introduction to JINT](https://jintmethod.dev/)
 - [JINT Expanded](https://jintmethod.dev/expanded)
 - [Interactive Demos](https://examples.jintmethod.dev/)
+- [An Actor Model Implementation](https://github.com/jint-method/actor-model-prototype)
