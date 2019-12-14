@@ -6,39 +6,34 @@ JIT has been used in manufacturing by [Toyota](https://en.wikipedia.org/wiki/Jus
 
 The purpose of JINT is to provide a methodology for efficiently loading, parsing, and running web sites & applications on devices ranging from the newest iPhone to the government-subsidized Nokia 2 on a 2g network.
 
+## Key Concepts:
+
+- Progressive Enhancement
+  - Enhance web components based on users device and network connection
+  - Render first functionality second
+- Main Thread ➞ UI Thread
+  - Main Thread is used to manipulate the DOM
+  - Main Thread is used to post messages to web workers, service workers, and servers
+- Off Main Thread Architecture
+  - Web Workers handle client-side business logic and state management
+  - Service Workers handle resource fetching/caching
+  - Focus on utilizing web servers and 3rd party APIs whenever possible
+- Persistent State Management
+  - One initial HTTP request
+  - [Ajax](https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX) all content
+  - [Pjax](https://pjax.herokuapp.com/) all pages
+- Offline First
+  - Service Workers follow an offline first content & resource policy
+  - Utilize the [Backgorund Sync API](https://developers.google.com/web/updates/2015/12/background-sync)
+  - Utilize the [IndexedDB API](https://developers.google.com/web/ilt/pwa/working-with-indexeddb)
+- Just In Time
+  - Only load what you need when you need it
+  - Defer all JavaScript
+  - Defer all CSS
+
 ## Why This Matters
 
 JINT forces you to carefully consider how your product will load its resources. By devising a strategy you can directly impact your product's SEO rankings ([according to Google, search and ads are (partially) ranked based on speed](https://developers.google.com/web/updates/2018/07/search-ads-speed)). Managing load times can also help with retaining users. According to [this study]((https://www.imperva.com/blog/ecommerce-study/)) 62% of users will wait 5 seconds or less for a page to load before leaving. According to Google, [53% of mobile users will leave after 3 seconds](https://www.thinkwithgoogle.com/marketing-resources/data-measurement/mobile-page-speed-new-industry-benchmarks/). Studies also show that when users see a skeleton screen (when compared to spinners or blank screens) they [perceive the load time to be shorter](https://uxdesign.cc/what-you-should-know-about-skeleton-screens-a820c45a571a).
-
-## Required Knowledge
-
-Please consider familiarizing yourself using the following links:
-
-- [ES6 Overview](https://ponyfoo.com/articles/es6)
-- [Custom Elements](https://html.spec.whatwg.org/multipage/custom-elements.html)
-- [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components)
-- [ES Modules](https://v8.dev/features/modules)
-- [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)
-- [Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
-- [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
-- [Actor Model](https://en.wikipedia.org/wiki/Actor_model)
-
-## Attribution
-
-JINT was constructed using ideas from the following videos and articles:
-
-- [RAIL Model](https://developers.google.com/web/fundamentals/performance/rail)
-- [App Shell Model](https://developers.google.com/web/fundamentals/architecture/app-shell)
-- [Idle Until Urgent](https://philipwalton.com/articles/idle-until-urgent/)
-- [Off Main-Thread State Management](https://dassur.ma/things/react-redux-comlink/)
-- [The 9am Rush Hour](https://dassur.ma/things/the-9am-rush-hour/)
-- [Main Thread is Overworked](https://youtu.be/7Rrv9qFMWNM)
-- [Architecting Web Applications](https://youtu.be/Vg60lf92EkM)
-- [Adaptive Loading](https://youtu.be/puUPpVrIRkc)
-- [Speed Essentials](https://youtu.be/reztLS3vomE)
-- [Lights, Camera, Action!](https://dassur.ma/things/lights-camera-action/)
-- [An Actor, a model, and an architect walk into the web...](https://dassur.ma/things/actormodel/)
-- [Headless Web Development](https://dassur.ma/things/headless-web-development/)
 
 ## Overview
 
@@ -78,3 +73,20 @@ In a web worker, web server, or anywhere that's not the UI thread.
 - [Implementation Guidelines](https://jintmethod.dev/implementation-guidelines)
 - [JINT Expanded](https://jintmethod.dev/expanded)
 - [Interactive Demos](https://examples.jintmethod.dev/)
+
+### Attribution
+
+JINT was constructed using ideas from the following videos and articles:
+
+- [RAIL Model](https://developers.google.com/web/fundamentals/performance/rail)
+- [App Shell Model](https://developers.google.com/web/fundamentals/architecture/app-shell)
+- [Idle Until Urgent](https://philipwalton.com/articles/idle-until-urgent/)
+- [Off Main-Thread State Management](https://dassur.ma/things/react-redux-comlink/)
+- [The 9am Rush Hour](https://dassur.ma/things/the-9am-rush-hour/)
+- [Main Thread is Overworked](https://youtu.be/7Rrv9qFMWNM)
+- [Architecting Web Applications](https://youtu.be/Vg60lf92EkM)
+- [Adaptive Loading](https://youtu.be/puUPpVrIRkc)
+- [Speed Essentials](https://youtu.be/reztLS3vomE)
+- [Lights, Camera, Action!](https://dassur.ma/things/lights-camera-action/)
+- [An Actor, a model, and an architect walk into the web...](https://dassur.ma/things/actormodel/)
+- [Headless Web Development](https://dassur.ma/things/headless-web-development/)

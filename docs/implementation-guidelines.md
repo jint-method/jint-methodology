@@ -45,6 +45,6 @@ Stylesheets hidden behind a user interaction should be lazy-loaded when the inte
 
 ### Continued Reading
 
-- [An Introduction to JINT](https://examples.jintmethod.dev/)
+- [An Introduction to JINT](https://jintmethod.dev/)
 - [JINT Expanded](https://jintmethod.dev/expanded)
 - [Interactive Demos](https://examples.jintmethod.dev/)
