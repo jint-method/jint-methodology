@@ -37,7 +37,7 @@ JINT forces you to carefully consider how your product will load its resources. 
 
 ## Overview
 
-With JINT you bring your own framework. [Next](https://nextjs.org/), [Nuxt](https://nuxtjs.org/), [Twig](https://twig.symfony.com/), [Blade](https://laravel.com/docs/5.8/blade), [Handlebars](https://handlebarsjs.com/), [React](https://reactjs.org/), [Angular](https://angular.io/), or [Vue](https://vuejs.org/). It doesn't matter what you choose or why it's all about how you use it.
+With JINT you bring your own framework. [Next](https://nextjs.org/), [Nuxt](https://nuxtjs.org/), [Twig](https://twig.symfony.com/), [Blade](https://laravel.com/docs/5.8/blade), [Handlebars](https://handlebarsjs.com/), [React](https://reactjs.org/), [Angular](https://angular.io/), or [Vue](https://vuejs.org/). It doesn't matter what you choose it's all about how you use it.
 
 ## Persistent State
 
