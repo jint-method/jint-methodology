@@ -1,10 +1,10 @@
 # JavaScript In The Nick Of Time (JINT)
 
-JINT is not a UI Framework or a Web Framework, and it's not a JavaScript library. JINT, at its core, is a question: **what would the web look like if we used the Just In Time (JIT) strategy for everything?**
+JINT is not a UI Framework, a Web Framework, and it's not a JavaScript library. JINT, at its core, is a question: **what would the web look like if we used the Just In Time (JIT) strategy for everything?**
 
-JIT has been used in manufacturing by [Toyota](https://en.wikipedia.org/wiki/Just-in-time_manufacturing) since the 1960s. The earliest JIT compiler was created around the same time by [John McCarthy](https://en.wikipedia.org/wiki/Just-in-time_compilation) while he worked on the [LISP](https://en.wikipedia.org/wiki/Lisp_(programming_language)) programming language. JIT compiling is currently utilized by Google's [v8 JavaScript Engine](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) which is used by Google Chrome, Chromium, Brave, and Opera browsers along with Electron applications and Nodejs.
+Just in time has been used in [manufacturing since the 1960s](https://en.wikipedia.org/wiki/Just-in-time_manufacturing) and the earliest JIT compiler was created by [John McCarthy](https://en.wikipedia.org/wiki/Just-in-time_compilation) while he worked on the [LISP](https://en.wikipedia.org/wiki/Lisp_(programming_language)) programming language. JIT compiling is currently utilized by Google's [v8 JavaScript Engine](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) and Google Chrome, Chromium, Brave, and Opera along with Electron  and Nodejs.
 
-The purpose of JINT is to provide a methodology for efficiently loading, parsing, and running web sites & applications on devices ranging from the newest iPhone to the government-subsidized Nokia 2 on a 2g network.
+The purpose of JINT is to provide a methodology for efficiently loading, parsing, and running websites & applications on devices ranging from the newest iPhones to the Nokia 2 with network conditions ranging from 5g to offline. What you load matters but when and how you load it matters more.
 
 ## Key Concepts:
 
@@ -37,9 +37,7 @@ JINT forces you to carefully consider how your product will load its resources. 
 
 ## Overview
 
-With JINT you can use any UI/Web Framework.
-
-Select a server-side rendering engine and a client-side rendering engine then use both rendering engines together to render content based on the context, desired functionality, network conditions, and the user's hardware. Developers are able to use frameworks like [Next](https://nextjs.org/) or [Nuxt](https://nuxtjs.org/) or can use templating engines such as [Twig](https://twig.symfony.com/) or [Blade](https://laravel.com/docs/5.8/blade). When tackling client-side rendering a developer can select the best tool for the job. Usually utilizing the [Template element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) is preferred, however, sometimes using a JavaScript templating engine like [Handlebars](https://handlebarsjs.com/) or selecting a UI Framework like [React](https://reactjs.org/), [Angular](https://angular.io/), or [Vue](https://vuejs.org/) would be a better choice.
+With JINT you bring your own framework. [Next](https://nextjs.org/), [Nuxt](https://nuxtjs.org/), [Twig](https://twig.symfony.com/), [Blade](https://laravel.com/docs/5.8/blade), [Handlebars](https://handlebarsjs.com/), [React](https://reactjs.org/), [Angular](https://angular.io/), or [Vue](https://vuejs.org/). It doesn't matter what you choose or why it's all about how you use it.
 
 ## Persistent State
 
@@ -73,10 +71,9 @@ In a web worker, web server, or anywhere that's not the UI thread.
 - [Implementation Guidelines](https://jintmethod.dev/implementation-guidelines)
 - [JINT Expanded](https://jintmethod.dev/expanded)
 - [Interactive Demos](https://examples.jintmethod.dev/)
+- [An Actor Model Implementation](https://github.com/jint-method/actor-model-prototype)
 
 ### Attribution
-
-JINT was constructed using ideas from the following videos and articles:
 
 - [RAIL Model](https://developers.google.com/web/fundamentals/performance/rail)
 - [App Shell Model](https://developers.google.com/web/fundamentals/architecture/app-shell)
