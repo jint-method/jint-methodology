@@ -8,9 +8,9 @@ The only `<script>` tag should be your runtime, and it should be deferred.
 
 ## Web Components
 
-Web Components are just Custom Elements with superpowers.
+Web Components are just [Custom Elements](https://html.spec.whatwg.org/multipage/custom-elements.html) with superpowers.
 
-[Custom Elements](https://html.spec.whatwg.org/multipage/custom-elements.html) are custom HTML elements where the tag name is lowercase, [kebab-case](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles), and contains at least 1 hyphen.
+Custom Elements are custom HTML elements where the tag name is lowercase, [kebab-case](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles), and contains at least 1 hyphen.
 
 When JavaScript is needed, upgrade a custom element into a [Web Component](https://developer.mozilla.org/en-US/docs/Web/Web_Components). Below is a diagram explaining how custom elements become web components.
 
