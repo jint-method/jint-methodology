@@ -256,8 +256,6 @@ customElements.define('user-account', UserAccountComponent);
 
 With the example web component above we now have a web component that uses a controller to prompt the user by asking if they're sure they want the account to be deleted. If they click the delete button and confirm the deletion the `deleteAccount()` method is called.
 
-It it possible to achieve the desired functionality with the `document.createElement()` method, however, the process of generating the required HTML can be tedious.
-
 ## Content Template Element
 
 The HTML Content Template `<template>` element is used to hold HTML that is not immediately rendered when the page is loaded. According to the [HTML spec](https://html.spec.whatwg.org/multipage/scripting.html#the-template-element), the template element is used to hold HTML that will be used to declare a document fragment within a script. Query selectors can then be used to access the HTML elements within the fragment so the content can be populated before the fragment is appended to the DOM.
@@ -337,17 +335,9 @@ customElements.define('blog-cards-component', BlogCardsComponent);
 
 The code above hand-waves some of the functionality such as: where does the card data come from, is there a loading animation/state, can the user infinitely scroll to view more cards, is there/should there be a load more button, etc. However, the script should give a general idea of how the template element can be leveraged to quickly render content on the client's side.
 
-As you can see the template element rendering method provides an easier way to quickly render content compared to the `document.createElement()` method.
-
-Although the template element is the preferred method for client-side rendering sometimes it is better to use a JavaScript templating engine or UI Framework. Especially when there is a vast amount of dynamic data that needs to be rendered or a state the needs to be managed.
-
 ## JavaScript Templating Engines & UI Frameworks
 
-[handlebars](https://handlebarsjs.com/) is a great choice as a JavaScript templating engine since it is used by 2.2 million projects and has 154 contributors on [GitHub](https://github.com/wycats/handlebars.js/). If you need to manage a state object UI Frameworks such as [React](https://reactjs.org/), [Angular](https://angular.io/), or [Vue](https://vuejs.org/) are also great options.
-
-### Let's start by asking why you're relying on a JavaScript templating engine?
-
-If the content you need to render is so complex or dynamic that it would be difficult use the template element you should ask yourself why you're not utilizing the server-side templating engine using an AJAX request. The default view of the section could be a loading spinner and when the section becomes visible an AJAX request is sent to the server. The server then renders the section and responds with the HTML to be injected.
+If the content you need to render is so complex or dynamic that it would be difficult use the template element you should ask yourself why you're not utilizing the server-side templating engine via an AJAX request. The default view of the section could be a loading spinner and when the section becomes visible an AJAX request is sent to the server. The server then renders the section and responds with the HTML to be injected.
 
 If your project is using a [headless CMS](https://en.wikipedia.org/wiki/Headless_content_management_system) then a JavaScript templating engine might make sense, however, you might be better off choosing a fully featured UI Framework such as [React](https://reactjs.org/), [Angular](https://angular.io/), or [Vue](https://vuejs.org/).
 
