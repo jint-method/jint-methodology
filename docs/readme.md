@@ -1,4 +1,4 @@
-# JavaScript In The Nick Of Time (JINT)
+# Just In The Nick Of Time (JINT)
 
 JINT is not a UI Framework, a Web Framework, and it's not a JavaScript library. JINT, at its core, is a question: **what would the web look like if we used the Just In Time (JIT) strategy for everything?**
 
