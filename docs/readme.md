@@ -10,20 +10,19 @@ The purpose of JINT is to provide a methodology for efficiently loading, parsing
 
 - Progressive Enhancement
   - Enhance web components based on users device and network connection
-  - Render first functionality second
+  - Render first, functionality second
 - Main Thread ➞ UI Thread
   - Main Thread is used to manipulate the DOM
   - Main Thread is used to post messages to web workers, service workers, and servers
 - Off Main Thread Architecture
   - Web Workers handle client-side business logic and state management
   - Service Workers handle resource fetching/caching
-  - Focus on utilizing web servers and 3rd party APIs whenever possible
 - Persistent State Management
   - One initial HTTP request
   - [Ajax](https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX) all content
   - [Pjax](https://pjax.herokuapp.com/) all pages
-- Offline First
-  - Service Workers follow an offline first content & resource policy
+- Offline Support
+  - Service Workers follow an offline first or offline backup content & resource policy
   - Utilize the [Backgorund Sync API](https://developers.google.com/web/updates/2015/12/background-sync)
   - Utilize the [IndexedDB API](https://developers.google.com/web/ilt/pwa/working-with-indexeddb)
 - Just In Time
