@@ -46,10 +46,6 @@ Not all Web Components and Controllers are Actors.
 
 Web Components and Controllers do not have to be an Actor to send a message.
 
-## Ideal JINT Loading Strategy
-
-![Diagram showcasing the ideal JINT loading strategy](/images/idea-jint-loading-strategy.png)
-
 ---
 
 ### Continued Reading
