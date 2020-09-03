@@ -1,7 +1,5 @@
 # Implementation Guidelines
 
-**A note from the author:** Use your brain! This is not the end-all-be-all set from on-high guidelines that everyone and every project must follow. Do whatever you need to do to make your product work. If you need a second script, add it. The world won't end and your product won't go from super awesome to utter crap. Take your time, make good decisions, write quality code and everything will work out in the end.
-
 ## Scripts
 
 The only `<script>` tag should be your runtime, and it should be deferred.
@@ -34,11 +32,9 @@ Try to limit your use of NPM packages and 3rd party libraries. Use tools like [r
 
 ## Stylesheets
 
-The only `<style>` or `<link rel="stylesheet">` tags should be critical CSS. All other CSS should be inline, eagerly loaded, or lazy-loaded.
+The only `<style>` or `<link rel="stylesheet">` tags should be critical CSS. All other CSS should lazy-loaded.
 
-Any stylesheet marked as eager loaded should be loaded after the `DOMContentLoaded` event has fired on the `window`. Once all eager stylesheets have loaded, the DOM state should change from hard loading to soft loading and the full-screen loading animation should be hidden/stopped. Typically, the eagerly loaded stylesheets would contain the critical CSS needed for the initial user experience.
-
-After the DOM state changes to soft loading, all lazy-loaded stylesheets should be loaded. Once all lazy stylesheets have loaded the DOM state should change from soft loading to idling and any loading animations should be hidden/stopped.
+After the `DOMContentLoaded` event has fired on the `window` all lazy-loaded stylesheets should be loaded. Once all lazy stylesheets have loaded the DOM state should change from soft loading to idling and any loading animations should be hidden/stopped.
 
 Stylesheets hidden behind a user interaction should be lazy-loaded when the interaction occurs.
 
@@ -48,7 +44,7 @@ Use a modified version of the [Actor Model](https://www.brianstorti.com/the-acto
 
 Not all Web Components and Controllers are Actors.
 
-Web Components and Controllers do not have to be an Actor to send a message to an Actor.
+Web Components and Controllers do not have to be an Actor to send a message.
 
 ## Ideal JINT Loading Strategy
 
@@ -59,6 +55,5 @@ Web Components and Controllers do not have to be an Actor to send a message to a
 ### Continued Reading
 
 - [An Introduction to JINT](https://jintmethod.dev/)
-- [JINT Expanded](https://jintmethod.dev/expanded)
 - [Interactive Demos](https://examples.jintmethod.dev/)
-- [An Actor Model Implementation](https://github.com/jint-method/actor-model-prototype)
+- [An Actor Model Messaging System Example](https://github.com/jint-method/actor-model-prototype)

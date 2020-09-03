@@ -37,15 +37,15 @@ JINT forces you to carefully consider how your product will load its resources. 
 
 ## Overview
 
-With JINT you bring your own framework. [Next](https://nextjs.org/), [Nuxt](https://nuxtjs.org/), [Twig](https://twig.symfony.com/), [Blade](https://laravel.com/docs/5.8/blade), [Handlebars](https://handlebarsjs.com/), [React](https://reactjs.org/), [Angular](https://angular.io/), or [Vue](https://vuejs.org/). It doesn't matter what you choose it's all about how you use it.
+With JINT you bring your own framework. [Next](https://nextjs.org/), [Nuxt](https://nuxtjs.org/), [Twig](https://twig.symfony.com/), [Blade](https://laravel.com/docs/5.8/blade), [Handlebars](https://handlebarsjs.com/), [React](https://reactjs.org/), [Angular](https://angular.io/), or [Vue](https://vuejs.org/). It doesn't matter what you choose, it's how you use it.
 
 ## Persistent State
 
-One of the key concepts of JINT is the utilization of Pjax. Pjax is a term used when referring to the hijacking of traditional page navigation within a project where only one HTTP request used to load the initial page. The future page requests are loaded using [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) and the content of the page is dynamically swapped. By using Pjax JINT can maintain a persistent state while utilizing server-side rendering. Pjax can also be used to animate between page when simulating single-page applications. When Pjax is paired with the [Session Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage), [indexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API), and [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers) developers can merge the benefits of both modern web application frameworks alongside the benefits of traditional websites.
+One of the key concepts of JINT is the utilization of Pjax. Pjax is a term used when referring to the hijacking of traditional page navigation within a project where only one HTTP request used to load the initial page. The future page requests are loaded using [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) and the content of the page is dynamically swapped. By using Pjax JINT can maintain a persistent state while utilizing server-side rendering. Pjax can also be used to animate between page when simulating single-page applications. When Pjax is paired with the [Session Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage), [indexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API), and [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers) developers can merge the benefits of UI frameworks with server-side rendering.
 
 ## Threads
 
-Stop overworking the main thread and stop thinking of it as the main thread, it's the UI thread now.
+Stop overworking the main thread and stop thinking of it as the main thread, it's the UI thread.
 
 ![Diagram visualizing the concept of off-loading work to other threads](/images/sharing-the-workload.png)
 
@@ -69,11 +69,10 @@ In a web worker, web server, or anywhere that's not the UI thread.
 ### Continued Reading
 
 - [Implementation Guidelines](https://jintmethod.dev/implementation-guidelines)
-- [JINT Expanded](https://jintmethod.dev/expanded)
 - [Interactive Demos](https://examples.jintmethod.dev/)
-- [An Actor Model Implementation](https://github.com/jint-method/actor-model-prototype)
+- [An Actor Model Messaging System Example](https://github.com/jint-method/actor-model-prototype)
 
-### Attribution
+### References
 
 - [RAIL Model](https://developers.google.com/web/fundamentals/performance/rail)
 - [App Shell Model](https://developers.google.com/web/fundamentals/architecture/app-shell)
