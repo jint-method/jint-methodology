@@ -1,6 +1,6 @@
 # Just In The Nick Of Time (JINT)
 
-JINT is not a UI Framework, a Web Framework, and it's not a JavaScript library. JINT, at its core, is a question: **what would the web look like if we used the Just In Time (JIT) strategy for everything?**
+JINT is not a UI Framework, or a Web Framework, and it's not a JavaScript library. JINT, at its core, is a question: **what would the web look like if we used the Just In Time (JIT) strategy for everything?**
 
 Just in time has been used in [manufacturing since the 1960s](https://en.wikipedia.org/wiki/Just-in-time_manufacturing) and the earliest JIT compiler was created by [John McCarthy](https://en.wikipedia.org/wiki/Just-in-time_compilation) while he worked on the [LISP](https://en.wikipedia.org/wiki/Lisp_(programming_language)) programming language. JIT compiling is currently utilized by Google's [v8 JavaScript Engine](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) and Google Chrome, Chromium, Brave, and Opera along with Electron  and Nodejs.
 
@@ -23,7 +23,7 @@ The purpose of JINT is to provide a methodology for efficiently loading, parsing
   - [Pjax](https://pjax.herokuapp.com/) all pages
 - Offline Support
   - Service Workers follow an offline first or offline backup content & resource policy
-  - Utilize the [Backgorund Sync API](https://developers.google.com/web/updates/2015/12/background-sync)
+  - Utilize the [Background Sync API](https://developers.google.com/web/updates/2015/12/background-sync)
   - Utilize the [IndexedDB API](https://developers.google.com/web/ilt/pwa/working-with-indexeddb)
 - Just In Time
   - Only load what you need when you need it
@@ -40,7 +40,7 @@ With JINT you bring your own framework. [Next](https://nextjs.org/), [Nuxt](http
 
 ## Persistent State
 
-One of the key concepts of JINT is the utilization of Pjax. Pjax is a term used when referring to the hijacking of traditional page navigation within a project where only one HTTP request used to load the initial page. The future page requests are loaded using [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) and the content of the page is dynamically swapped. By using Pjax JINT can maintain a persistent state while utilizing server-side rendering. Pjax can also be used to animate between page when simulating single-page applications. When Pjax is paired with the [Session Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage), [indexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API), and [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers) developers can merge the benefits of UI frameworks with server-side rendering.
+One of the key concepts of JINT is the utilization of Pjax. Pjax is a term used when referring to the hijacking of traditional page navigation within a project where only one HTTP request is used to load the initial page. The future page requests are loaded using [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) and the content of the page is dynamically swapped. By using Pjax we can maintain a persistent state while utilizing server-side rendering. Pjax can also be used to animate between pages when simulating single-page applications. When Pjax is paired with the [Session Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage), [indexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API), and [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers) developers can merge the benefits of UI frameworks with server-side rendering.
 
 ## Threads
 
